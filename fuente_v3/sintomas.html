@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:PF;font-weight:700;src:url(node_modules/@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2)}
+@font-face{font-family:PF;font-weight:800;src:url(node_modules/@fontsource/playfair-display/files/playfair-display-latin-800-normal.woff2)}
+@font-face{font-family:PO;font-weight:400;src:url(node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff2)}
+@font-face{font-family:PO;font-weight:500;src:url(node_modules/@fontsource/poppins/files/poppins-latin-500-normal.woff2)}
+@font-face{font-family:PO;font-weight:600;src:url(node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:PO;font-weight:700;src:url(node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2)}
+:root{--purple:#5b2a7e;--purple2:#7a3c9c;--magenta:#d63c7e;--pink:#ec6aa0;--teal:#1f5a6b}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1080px;overflow:hidden;background:#fbe3ee}
+#stage{position:relative;width:1080px;height:1080px;overflow:hidden;font-family:PO,sans-serif;color:var(--purple);
+ background:radial-gradient(900px 700px at 15% 8%,#fff1f6 0%,transparent 60%),
+ radial-gradient(900px 800px at 95% 95%,#e9c5ec 0%,transparent 60%),
+ linear-gradient(160deg,#fde9f1 0%,#f9d2e3 55%,#f1c4df 100%)}
+.abs{position:absolute;opacity:0;will-change:transform,opacity}
+.pf{font-family:PF,serif;font-weight:700}
+.mag{color:var(--magenta)}
+.card{background:rgba(255,255,255,.72);border:2px solid rgba(180,110,190,.55);border-radius:44px;box-shadow:0 14px 40px rgba(122,60,156,.14)}
+.band{background:linear-gradient(90deg,#5b2a7e,#7a3c9c);border-radius:60px;box-shadow:0 14px 34px rgba(91,42,126,.35)}
+.circ{border-radius:50%;background:radial-gradient(circle at 35% 30%,#f48ab8,#d63c7e 70%);box-shadow:0 0 0 10px rgba(236,106,160,.18)}
+.brush{position:absolute;inset:0;background:linear-gradient(90deg,#4f2174,#6a3490 60%,#58297f);filter:url(#rough)}
+.lab{background:#fff;border:2.5px solid var(--magenta);border-radius:22px;padding:12px 20px;box-shadow:0 8px 24px rgba(214,60,126,.18)}
+.lab b{display:block;font-size:20px;font-weight:700;letter-spacing:.5px;color:var(--magenta)}
+.lab span{font-size:19px;color:var(--purple)}
+.step{display:flex;align-items:center;gap:26px;padding:0 34px;height:150px}
+.step .circ{width:84px;height:84px;flex:none;color:#fff;display:flex;align-items:center;justify-content:center;font:800 42px PF;font-variant-numeric:lining-nums}
+.step h3{font:700 33px/1.15 PF;color:var(--purple)}
+.step p{font:400 24px/1.3 PO;color:#6b4a86;margin-top:5px}
+.step em{font-style:normal;color:var(--magenta);font-weight:600}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <filter id="rough" x="-5%" y="-30%" width="110%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.035 0.25" numOctaves="3" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="16"/></filter>
+ <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b58be0"/><stop offset="1" stop-color="#7b4ab0"/></linearGradient>
+ <linearGradient id="gp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd1e4"/><stop offset="1" stop-color="#f19cc2"/></linearGradient>
+ <linearGradient id="ut" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc7de"/><stop offset="1" stop-color="#f07fae"/></linearGradient>
+ <path id="leaf" d="M0 0C14-26 42-26 58 0C42 26 14 26 0 0Z"/>
+</defs></svg>
+<div id="stage">
+
+<!-- ambient -->
+<svg class="abs" id="ring" style="left:-80px;top:60px;opacity:1" width="1240" height="1000" viewBox="0 0 1240 1000"><circle cx="760" cy="500" r="430" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3"/><circle cx="760" cy="500" r="390" fill="rgba(255,255,255,.18)"/></svg>
+<div id="bokeh"></div>
+<svg class="abs" id="leavesR" style="right:-20px;top:230px;opacity:1" width="260" height="560" viewBox="0 0 260 560"></svg>
+<svg class="abs" id="leavesL" style="left:-40px;top:700px;opacity:1" width="200" height="320" viewBox="0 0 200 320"></svg>
+
+<!-- header -->
+<img class="abs" id="logo" src="logo_t.png" style="left:56px;top:34px;width:600px">
+<div class="abs" id="badge" style="right:44px;top:44px;background:var(--purple2);color:#fff;border-radius:24px;padding:8px 26px;font:600 34px PO"><span id="bn">1</span>/4</div>
+
+<!-- S1 -->
+<div class="abs s1 pf" id="s1a" style="left:0;width:1080px;text-align:center;top:222px;font-size:62px;white-space:nowrap">¿CUÁLES SON LOS</div>
+<div class="abs s1 pf" id="s1b" style="left:0;width:1080px;text-align:center;top:292px;font:800 112px/1 PF;white-space:nowrap;color:var(--purple)">PRINCIPALES</div>
+<div class="abs s1 pf" id="s1c" style="left:0;width:1080px;text-align:center;top:408px;font:800 152px/1 PF;white-space:nowrap;background:linear-gradient(180deg,#e8508f,#c22f72);-webkit-background-clip:text;color:transparent">SÍNTOMAS</div>
+<div class="abs s1" id="s1d" style="left:160px;top:600px;width:760px;height:92px"><div class="brush" id="s1brush"></div><div class="pf" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:42px;letter-spacing:.5px;white-space:nowrap">DE LA ENDOMETRIOSIS?</div></div>
+<div class="abs s1" id="s1e" style="left:0;width:1080px;text-align:center;top:716px;font:500 38px/1.4 PO;color:var(--purple)">Reconocerlos a tiempo es <b class="mag" style="font-weight:700">clave</b><br>para tratarla mejor.</div>
+<div class="abs band s1" id="s1band" style="left:44px;top:884px;width:992px;height:100px;display:flex;align-items:center;justify-content:space-around;color:#fff;font:600 32px PO"><span>Dolor</span><span style="opacity:.4">|</span><span>Sangrado</span><span style="opacity:.4">|</span><span>Fertilidad</span></div>
+
+<!-- doctor (s4) -->
+<div class="abs" id="doc" style="left:560px;top:230px;width:520px;height:749px">
+ <div style="position:absolute;left:-60px;top:20px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,0) 68%)"></div><img id="docimg" src="doc_soft.png" style="position:relative;width:100%;height:100%;display:block"></div>
+
+<!-- S2 -->
+<div class="abs s2 pf" id="s2a" style="left:0;width:1080px;text-align:center;top:214px;font-size:56px;line-height:1.05">PRINCIPALES <span class="mag">SÍNTOMAS</span></div>
+<div class="abs s2" id="s2d" style="left:0;width:1080px;text-align:center;top:290px"><svg width="420" height="40" viewBox="0 0 420 40"><line x1="0" y1="20" x2="170" y2="20" stroke="#d63c7e" stroke-width="2"/><path d="M210 33C180 14 188 4 200 6c6 1 10 6 10 6s4-5 10-6c12-2 20 8-10 27z" fill="none" stroke="#d63c7e" stroke-width="2.5"/><line x1="250" y1="20" x2="420" y2="20" stroke="#d63c7e" stroke-width="2"/></svg></div>
+<div class="abs card step s2" id="st1" style="left:44px;top:352px;width:992px"><div class="circ">1</div><div><h3>Dolor pélvico <span class="mag">crónico</span></h3><p>persistente, <em>incluso fuera</em> de la menstruación</p></div></div>
+<div class="abs card step s2" id="st2" style="left:44px;top:524px;width:992px"><div class="circ">2</div><div><h3>Cólicos menstruales <span class="mag">intensos</span></h3><p>dolor que <em>limita</em> tus actividades diarias</p></div></div>
+<div class="abs card step s2" id="st3" style="left:44px;top:696px;width:992px"><div class="circ">3</div><div><h3>Dolor en las <span class="mag">relaciones sexuales</span></h3><p>especialmente con la penetración <em>profunda</em></p></div></div>
+<div class="abs band s2" id="s2band" style="left:44px;top:884px;width:992px;height:120px;display:flex;align-items:center;justify-content:center;color:#fff;font:500 32px PO">Dolor que se repite <b style="font-weight:700;color:#ffd1e4;margin-left:10px">cada mes</b></div>
+
+<!-- S3 -->
+<div class="abs s3 pf" id="s3a" style="left:0;width:1080px;text-align:center;top:214px;font-size:56px;line-height:1.05">PRINCIPALES <span class="mag">SÍNTOMAS</span></div>
+<div class="abs s3" id="s3d" style="left:0;width:1080px;text-align:center;top:290px"><svg width="420" height="40" viewBox="0 0 420 40"><line x1="0" y1="20" x2="170" y2="20" stroke="#d63c7e" stroke-width="2"/><path d="M210 33C180 14 188 4 200 6c6 1 10 6 10 6s4-5 10-6c12-2 20 8-10 27z" fill="none" stroke="#d63c7e" stroke-width="2.5"/><line x1="250" y1="20" x2="420" y2="20" stroke="#d63c7e" stroke-width="2"/></svg></div>
+<div class="abs card step s3" id="st4" style="left:44px;top:352px;width:992px"><div class="circ">4</div><div><h3>Dolor al <span class="mag">evacuar u orinar</span></h3><p>se <em>intensifica</em> durante la menstruación</p></div></div>
+<div class="abs card step s3" id="st5" style="left:44px;top:524px;width:992px"><div class="circ">5</div><div><h3>Sangrado menstrual <span class="mag">abundante</span></h3><p>o sangrado <em>irregular</em> entre periodos</p></div></div>
+<div class="abs card step s3" id="st6" style="left:44px;top:696px;width:992px"><div class="circ">6</div><div><h3>Dificultad para <span class="mag">embarazarse</span></h3><p>la endometriosis puede afectar tu <em>fertilidad</em></p></div></div>
+<div class="abs band s3" id="s3band" style="left:44px;top:884px;width:992px;height:120px;display:flex;align-items:center;justify-content:center;color:#fff;font:500 32px PO">Sangrado y <b style="font-weight:700;color:#ffd1e4;margin:0 10px">fertilidad</b> también importan</div>
+
+<!-- S4 -->
+<div class="abs s4 pf" id="s4a" style="left:62px;top:228px;font-size:46px;color:var(--magenta);letter-spacing:1px">NO NORMALICES</div>
+<div class="abs s4 pf" id="s4b" style="left:58px;top:284px;font:800 96px/1 PF;letter-spacing:-1px;white-space:nowrap;color:var(--purple)">EL DOLOR</div>
+<div class="abs s4" id="s4br" style="left:48px;top:392px;width:470px;height:16px"><div class="brush" id="s4brush" style="border-radius:8px;background:linear-gradient(90deg,#d63c7e,#ec6aa0)"></div></div>
+<div class="abs s4" id="s4c" style="left:66px;top:446px;width:500px;font:400 32px/1.45 PO">Si reconoces estos síntomas, consulta con tu <b class="mag" style="font-weight:700">especialista</b>: un <b class="mag" style="font-weight:700">diagnóstico temprano</b> mejora tu calidad de vida.</div>
+<div class="abs s4" id="s4btn" style="left:62px;top:716px;background:linear-gradient(90deg,#d63c7e,#ec6aa0);color:#fff;border-radius:50px;padding:24px 44px;font:600 31px PO;box-shadow:0 14px 34px rgba(214,60,126,.4);white-space:nowrap">Agenda tu consulta &nbsp;→</div>
+<div class="abs s4" id="s4disc" style="left:0;width:1080px;text-align:center;top:1004px;font:400 20px PO;color:#8c6a9f">Información educativa. No sustituye la consulta médica.</div>
+
+<!-- dots -->
+<div class="abs" id="dots" style="left:0;width:1080px;top:1038px;text-align:center;opacity:1"><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span></div>
+<style>#dots .dt{display:inline-block;width:12px;height:12px;border-radius:6px;background:#d9b3d8;margin:0 6px}#dots .dt.on{background:var(--purple2);width:30px}</style>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cl=x=>Math.max(0,Math.min(1,x));
+const P=(t,a,d)=>cl((t-a)/d);
+const eo=x=>1-Math.pow(1-x,3);
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const bk=x=>{const c1=1.7,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+// scenes: s1 0-4.6, s2 4.6-9.6, s3 9.6-15.4, s4 15.4-20
+const SC=[0,4.2,10.2,16.2,22];
+// build leaves
+function branch(svg,n,len,rot,seed,grad){let s='';let x=0,y=0;
+ for(let i=0;i<n;i++){const k=i/n;const ang=-90+Math.sin(i*1.3+seed)*8;
+  const side=i%2?1:-1;
+  s+=`<g transform="translate(${130+Math.sin(k*2+seed)*10},${520-k*len}) rotate(${side*(40+k*10)-90*(side>0?0:0)}) scale(${2.0-k*.9})"><use href="#leaf" fill="${grad}" opacity="${.92-k*.15}"/></g>`}
+ s=`<path d="M130 540C128 400 140 250 130 ${540-len}" fill="none" stroke="#8d5cc0" stroke-width="3"/>`+s;
+ svg.innerHTML=s}
+branch($('leavesR'),9,470,0,1,'url(#gl)');
+(function(){let s='';for(let i=0;i<6;i++){const k=i/6;s+=`<g transform="translate(${60+k*40},${300-k*230}) rotate(${(i%2?30:-50)-60}) scale(${.9-k*.45})"><use href="#leaf" fill="url(#gp)" opacity=".85"/></g>`}
+ $('leavesL').innerHTML=`<path d="M60 310C62 220 80 130 100 60" fill="none" stroke="#e79ac0" stroke-width="3"/>`+s})();
+// bokeh
+(function(){let h='';for(let i=0;i<14;i++){const x=(i*173%1000)+40,y=(i*311%900)+80,r=14+(i*7%26);h+=`<div class="abs bk" style="left:${x}px;top:${y}px;width:${r*2}px;height:${r*2}px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.7),rgba(255,255,255,0));opacity:.5" data-x="${x}" data-y="${y}" data-s="${i}"></div>`}$('bokeh').innerHTML=h})();
+
+
+const H=+new URLSearchParams(location.search).get('h')||1080;const TALL=H>1080;
+if(TALL){document.documentElement.style.height=H+'px';document.body.style.height=H+'px';$('stage').style.height=H+'px';
+ const dy=T=>T<200?0:T<320?50:T<800?130:270;
+ document.querySelectorAll('#stage .abs').forEach(e=>{
+  if(e.classList.contains('bk')){e.style.top=(parseFloat(e.style.top)*H/1080)+'px';return}
+  if(e.id=='s4disc'){e.style.top='1252px';return}
+  if(e.id=='conn'){e.style.top='130px';return}
+  if(e.id=='ring'||e.id=='doc')return;
+  const T=parseFloat(e.style.top);if(isNaN(T))return;e.style.top=(T+dy(T))+'px'});
+ $('ring').style.top='160px';$('dots').style.top=(1038+270)+'px';}
+
+// helpers: show element between a..b with animation
+function show(id,t,a,b,kind='up',d=.6,dx=0){const e=$(id);const pi=eo(P(t,a,d));const po=P(t,b,.4);
+ let o=pi*(1-po),tf='';
+ if(kind=='up')tf=`translateY(${(1-pi)*46-po*14}px)`;
+ else if(kind=='left')tf=`translateX(${-(1-pi)*80}px)`;
+ else if(kind=='right')tf=`translateX(${(1-pi)*80}px)`;
+ else if(kind=='pop'){const q=bk(P(t,a,d));tf=`scale(${.6+.4*q})`}
+ e.style.opacity=o;e.style.transform=tf;e.style.visibility=o>0.001?'visible':'hidden'}
+function wipe(id,t,a,d,b){const e=$(id);const p=eio(P(t,a,d));const po=P(t,b,.4);e.style.clipPath=`inset(0 ${(1-p)*100}% 0 0)`}
+
+function setT(t){
+ $('ring').style.transform=`rotate(${t*1.5}deg) scale(${1+Math.sin(t*.6)*.02})`;
+ $('leavesR').style.transform=`rotate(${Math.sin(t*.9)*2.2}deg)`;$('leavesR').style.transformOrigin='130px 540px';
+ $('leavesL').style.transform=`rotate(${Math.sin(t*.8+1)*3}deg)`;$('leavesL').style.transformOrigin='60px 310px';
+ document.querySelectorAll('.bk').forEach(e=>{const s=+e.dataset.s;e.style.transform=`translate(${Math.sin(t*.5+s)*14}px,${Math.cos(t*.4+s*1.7)*18}px)`;e.style.opacity=.35+.25*Math.sin(t*.8+s)});
+ show('logo',t,.1,99,'left',.8);show('badge',t,.3,99,'pop',.5);
+ const sc=SC.findIndex((v,i)=>t>=v&&t<SC[i+1]);$('bn').textContent=sc+1;
+ document.querySelectorAll('#dots .dt').forEach((d,i)=>d.className='dt'+(i==sc?' on':''));
+ // S1
+ const e1=SC[1]-.1;
+ show('s1a',t,.5,e1,'up');show('s1b',t,.9,e1,'up',.7);show('s1c',t,1.3,e1,'pop',.8);
+ show('s1d',t,2.0,e1,'none',.2);wipe('s1d',t,2.0,.7);
+ show('s1e',t,2.7,e1,'up');show('s1band',t,3.2,e1,'up');
+ // S2 / S3 steps
+ for(const [k,s0,e] of [[2,SC[1],SC[2]-.1],[3,SC[2],SC[3]-.1]]){
+  show('s'+k+'a',t,s0+.1,e,'up');show('s'+k+'d',t,s0+.4,e,'up');
+  const base=k==2?1:4;
+  [0,1,2].forEach(j=>show('st'+(base+j),t,s0+.9+j*1.5,e,'right',.7));
+  show('s'+k+'band',t,s0+.9+3*1.5,e,'up');
+ }
+ // doctor only s4
+ const d=$('doc');const s4=SC[3];const inD4=eo(P(t,s4+.2,.9));
+ d.style.left=(TALL?540:560)+'px';d.style.top=(TALL?400:230)+'px';d.style.width=(TALL?540:520)+'px';d.style.height=(TALL?777:749)+'px';
+ d.style.opacity=t<SC[3]?0:inD4;d.style.transform=`translateX(${(1-inD4)*90}px)`;d.style.visibility=t<SC[3]?'hidden':'visible';
+ show('s4a',t,s4+.1,99,'up');show('s4b',t,s4+.3,99,'up',.8);
+ show('s4br',t,s4+.7,99,'none',.2);wipe('s4br',t,s4+.7,.7);
+ show('s4c',t,s4+1.2,99,'up');show('s4btn',t,s4+2.2,99,'pop',.7);
+ if(t>s4+2.9)$('s4btn').style.transform=`scale(${1+.025*Math.sin((t-s4)*5)})`;
+ show('s4disc',t,s4+2.8,99,'up');
+}
+window.setT=setT;
+</script></body></html>
