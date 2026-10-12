@@ -57,7 +57,8 @@ html,body{width:1080px;height:1080px;overflow:hidden;background:#fbe3ee}
 <div class="abs s1" id="s1h" style="left:70px;top:748px"><svg width="420" height="40" viewBox="0 0 420 40"><line x1="0" y1="20" x2="170" y2="20" stroke="#d63c7e" stroke-width="2"/><path d="M210 33C180 14 188 4 200 6c6 1 10 6 10 6s4-5 10-6c12-2 20 8-10 27z" fill="none" stroke="#d63c7e" stroke-width="2.5" transform="translate(0,0)"/><line x1="250" y1="20" x2="420" y2="20" stroke="#d63c7e" stroke-width="2"/></svg></div>
 
 <!-- doctor arch (s1 + s4) -->
-<div class="abs" id="doc" style="left:720px;top:222px;width:310px;height:560px;border-radius:155px 155px 28px 28px;overflow:hidden;border:6px solid #fff;box-shadow:0 20px 50px rgba(122,60,156,.28)"><img id="docimg" src="doc_c.png" style="width:100%;height:100%;object-fit:cover;object-position:50% 0"></div>
+<div class="abs" id="doc" style="left:560px;top:230px;width:520px;height:749px">
+ <div style="position:absolute;left:-60px;top:20px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,0) 68%)"></div><img id="docimg" src="doc_soft.png" style="position:relative;width:100%;height:100%;display:block"></div>
 
 <!-- S1 card -->
 <div class="abs card s1" id="s1card" style="left:44px;top:808px;width:992px;height:150px;display:flex;align-items:center;gap:30px;padding:0 36px">
@@ -190,9 +191,9 @@ function setT(t){
  const inD=eo(P(t,1.2,.9)),outD=P(t,e1,.5),inD4=eo(P(t,SC[3]+.2,.9));
  let dOp,dTf;
  if(t<SC[2]){dOp=0;d.style.left='720px';d.style.top=(TALL?272:222)+'px';d.style.width='310px';d.style.height=(TALL?700:560)+'px';dTf=`translateX(${(1-inD)*90+outD*60}px)`}
- else{dOp=inD4;d.style.left='600px';d.style.top=(TALL?272:222)+'px';d.style.width='432px';d.style.height=(TALL?860:700)+'px';d.style.borderRadius='216px 216px 30px 30px';dTf=`translateX(${(1-inD4)*90}px)`}
+ else{dOp=inD4;d.style.left=(TALL?540:560)+'px';d.style.top=(TALL?400:230)+'px';d.style.width=(TALL?540:520)+'px';d.style.height=(TALL?777:749)+'px';dTf=`translateX(${(1-inD4)*90}px)`}
  d.style.opacity=dOp;d.style.transform=dTf;d.style.visibility=dOp>0?'visible':'hidden';
- $('docimg').style.transform=`scale(${1+t*.003})`;
+ 
  // S2
  const s2=SC[1],e2=SC[2]-.1;
  show('s2a',t,s2+.1,e2,'up');
