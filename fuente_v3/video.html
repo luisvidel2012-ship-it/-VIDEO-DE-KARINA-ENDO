@@ -144,6 +144,18 @@ branch($('leavesR'),9,470,0,1,'url(#gl)');
 (function(){let h='';for(let i=0;i<14;i++){const x=(i*173%1000)+40,y=(i*311%900)+80,r=14+(i*7%26);h+=`<div class="abs bk" style="left:${x}px;top:${y}px;width:${r*2}px;height:${r*2}px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.7),rgba(255,255,255,0));opacity:.5" data-x="${x}" data-y="${y}" data-s="${i}"></div>`}$('bokeh').innerHTML=h})();
 $('s4name').innerHTML='';
 
+
+const H=+new URLSearchParams(location.search).get('h')||1080;const TALL=H>1080;
+if(TALL){document.documentElement.style.height=H+'px';document.body.style.height=H+'px';$('stage').style.height=H+'px';
+ const dy=T=>T<200?0:T<320?50:T<800?130:270;
+ document.querySelectorAll('#stage .abs').forEach(e=>{
+  if(e.classList.contains('bk')){e.style.top=(parseFloat(e.style.top)*H/1080)+'px';return}
+  if(e.id=='s4disc'){e.style.top='1252px';return}
+  if(e.id=='conn'){e.style.top='130px';return}
+  if(e.id=='ring'||e.id=='doc')return;
+  const T=parseFloat(e.style.top);if(isNaN(T))return;e.style.top=(T+dy(T))+'px'});
+ $('ring').style.top='160px';$('dots').style.top=(1038+270)+'px';}
+
 // helpers: show element between a..b with animation
 function show(id,t,a,b,kind='up',d=.6,dx=0){const e=$(id);const pi=eo(P(t,a,d));const po=P(t,b,.4);
  let o=pi*(1-po),tf='';
@@ -177,8 +189,8 @@ function setT(t){
  const d=$('doc');
  const inD=eo(P(t,1.2,.9)),outD=P(t,e1,.5),inD4=eo(P(t,SC[3]+.2,.9));
  let dOp,dTf;
- if(t<SC[2]){dOp=inD*(1-outD);d.style.left='720px';d.style.top='222px';d.style.width='310px';d.style.height='560px';dTf=`translateX(${(1-inD)*90+outD*60}px)`}
- else{dOp=inD4;d.style.left='600px';d.style.top='222px';d.style.width='432px';d.style.height='700px';d.style.borderRadius='216px 216px 30px 30px';dTf=`translateX(${(1-inD4)*90}px)`}
+ if(t<SC[2]){dOp=inD*(1-outD);d.style.left='720px';d.style.top=(TALL?272:222)+'px';d.style.width='310px';d.style.height=(TALL?700:560)+'px';dTf=`translateX(${(1-inD)*90+outD*60}px)`}
+ else{dOp=inD4;d.style.left='600px';d.style.top=(TALL?272:222)+'px';d.style.width='432px';d.style.height=(TALL?860:700)+'px';d.style.borderRadius='216px 216px 30px 30px';dTf=`translateX(${(1-inD4)*90}px)`}
  d.style.opacity=dOp;d.style.transform=dTf;d.style.visibility=dOp>0?'visible':'hidden';
  $('docimg').style.transform=`scale(${1+t*.003})`;
  // S2
