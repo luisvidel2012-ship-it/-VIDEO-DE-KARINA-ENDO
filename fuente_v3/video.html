@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:PF;font-weight:700;src:url(node_modules/@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2)}
+@font-face{font-family:PF;font-weight:800;src:url(node_modules/@fontsource/playfair-display/files/playfair-display-latin-800-normal.woff2)}
+@font-face{font-family:PO;font-weight:400;src:url(node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff2)}
+@font-face{font-family:PO;font-weight:500;src:url(node_modules/@fontsource/poppins/files/poppins-latin-500-normal.woff2)}
+@font-face{font-family:PO;font-weight:600;src:url(node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:PO;font-weight:700;src:url(node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2)}
+:root{--purple:#5b2a7e;--purple2:#7a3c9c;--magenta:#d63c7e;--pink:#ec6aa0;--teal:#1f5a6b}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1080px;overflow:hidden;background:#fbe3ee}
+#stage{position:relative;width:1080px;height:1080px;overflow:hidden;font-family:PO,sans-serif;color:var(--purple);
+ background:radial-gradient(900px 700px at 15% 8%,#fff1f6 0%,transparent 60%),
+ radial-gradient(900px 800px at 95% 95%,#e9c5ec 0%,transparent 60%),
+ linear-gradient(160deg,#fde9f1 0%,#f9d2e3 55%,#f1c4df 100%)}
+.abs{position:absolute;opacity:0;will-change:transform,opacity}
+.pf{font-family:PF,serif;font-weight:700}
+.mag{color:var(--magenta)}
+.card{background:rgba(255,255,255,.72);border:2px solid rgba(180,110,190,.55);border-radius:44px;box-shadow:0 14px 40px rgba(122,60,156,.14)}
+.band{background:linear-gradient(90deg,#5b2a7e,#7a3c9c);border-radius:60px;box-shadow:0 14px 34px rgba(91,42,126,.35)}
+.circ{border-radius:50%;background:radial-gradient(circle at 35% 30%,#f48ab8,#d63c7e 70%);box-shadow:0 0 0 10px rgba(236,106,160,.18)}
+.brush{position:absolute;inset:0;background:linear-gradient(90deg,#4f2174,#6a3490 60%,#58297f);filter:url(#rough)}
+.lab{background:#fff;border:2.5px solid var(--magenta);border-radius:22px;padding:12px 20px;box-shadow:0 8px 24px rgba(214,60,126,.18)}
+.lab b{display:block;font-size:20px;font-weight:700;letter-spacing:.5px;color:var(--magenta)}
+.lab span{font-size:19px;color:var(--purple)}
+.step{display:flex;align-items:center;gap:26px;padding:0 34px;height:150px}
+.step .circ{width:84px;height:84px;flex:none;color:#fff;display:flex;align-items:center;justify-content:center;font:800 42px PF;font-variant-numeric:lining-nums}
+.step h3{font:700 33px/1.15 PF;color:var(--purple)}
+.step p{font:400 24px/1.3 PO;color:#6b4a86;margin-top:5px}
+.step em{font-style:normal;color:var(--magenta);font-weight:600}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <filter id="rough" x="-5%" y="-30%" width="110%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.035 0.25" numOctaves="3" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="16"/></filter>
+ <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b58be0"/><stop offset="1" stop-color="#7b4ab0"/></linearGradient>
+ <linearGradient id="gp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd1e4"/><stop offset="1" stop-color="#f19cc2"/></linearGradient>
+ <linearGradient id="ut" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc7de"/><stop offset="1" stop-color="#f07fae"/></linearGradient>
+ <path id="leaf" d="M0 0C14-26 42-26 58 0C42 26 14 26 0 0Z"/>
+</defs></svg>
+<div id="stage">
+
+<!-- ambient -->
+<svg class="abs" id="ring" style="left:-80px;top:60px;opacity:1" width="1240" height="1000" viewBox="0 0 1240 1000"><circle cx="760" cy="500" r="430" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3"/><circle cx="760" cy="500" r="390" fill="rgba(255,255,255,.18)"/></svg>
+<div id="bokeh"></div>
+<svg class="abs" id="leavesR" style="right:-20px;top:230px;opacity:1" width="260" height="560" viewBox="0 0 260 560"></svg>
+<svg class="abs" id="leavesL" style="left:-40px;top:700px;opacity:1" width="200" height="320" viewBox="0 0 200 320"></svg>
+
+<!-- header -->
+<img class="abs" id="logo" src="logo_t.png" style="left:56px;top:34px;width:600px">
+<div class="abs" id="badge" style="right:44px;top:44px;background:var(--purple2);color:#fff;border-radius:24px;padding:8px 26px;font:600 34px PO"><span id="bn">1</span>/4</div>
+
+<!-- S1 -->
+<div class="abs s1 pf" id="s1a" style="left:70px;top:222px;font-size:54px;white-space:nowrap">¿SABÍAS QUE HASTA</div>
+<div class="abs s1 pf" id="s1num" style="left:62px;top:268px;font:800 160px/1 PF;font-variant-numeric:lining-nums;letter-spacing:-5px;white-space:nowrap;background:linear-gradient(180deg,#e8508f,#c22f72);-webkit-background-clip:text;color:transparent"><span id="n1">30</span>–<span id="n2">50</span> %</div>
+<div class="abs s1" id="s1b" style="left:48px;top:458px;width:660px;height:84px"><div class="brush" id="s1brush"></div><div class="pf" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:29px;letter-spacing:.5px;white-space:nowrap">DE LAS MUJERES CON ENDOMETRIOSIS</div></div>
+<div class="abs s1" id="s1c" style="left:70px;top:566px;font:500 36px/1.35 PO;color:var(--purple);width:600px">enfrenta dificultades para <b class="mag" style="font-weight:700">embarazarse</b>.</div>
+<div class="abs s1" id="s1h" style="left:70px;top:690px"><svg width="420" height="40" viewBox="0 0 420 40"><line x1="0" y1="20" x2="170" y2="20" stroke="#d63c7e" stroke-width="2"/><path d="M210 33C180 14 188 4 200 6c6 1 10 6 10 6s4-5 10-6c12-2 20 8-10 27z" fill="none" stroke="#d63c7e" stroke-width="2.5" transform="translate(0,0)"/><line x1="250" y1="20" x2="420" y2="20" stroke="#d63c7e" stroke-width="2"/></svg></div>
+
+<!-- doctor arch (s1 + s4) -->
+<div class="abs" id="doc" style="left:720px;top:222px;width:310px;height:560px;border-radius:155px 155px 28px 28px;overflow:hidden;border:6px solid #fff;box-shadow:0 20px 50px rgba(122,60,156,.28)"><img id="docimg" src="doc_c.png" style="width:100%;height:100%;object-fit:cover;object-position:50% 0"></div>
+
+<!-- S1 card -->
+<div class="abs card s1" id="s1card" style="left:44px;top:808px;width:992px;height:150px;display:flex;align-items:center;gap:30px;padding:0 36px">
+ <div class="circ" style="width:100px;height:100px;flex:none;display:flex;align-items:center;justify-content:center"><svg width="70" height="70" viewBox="0 0 400 380" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"><path d="M200 70C150 70 118 98 114 142C110 190 135 232 160 268L168 296H232L240 268C265 232 290 190 286 142C282 98 250 70 200 70Z"/><path d="M122 120C70 92 40 112 38 150"/><path d="M278 120C330 92 360 112 362 150"/><circle cx="40" cy="170" r="24"/><circle cx="360" cy="170" r="24"/></svg></div>
+ <div style="font:400 33px/1.4 PO">Entender cómo afecta tu <b class="mag" style="font-weight:600">fertilidad</b> es <b class="mag" style="font-weight:600">clave</b> para tratarla mejor.</div></div>
+
+<!-- S2 -->
+<div class="abs s2 pf" id="s2a" style="left:0;width:1080px;text-align:center;top:214px;font-size:60px;line-height:1.05">¿QUÉ PASA <span class="mag">EN EL CUERPO</span>?</div>
+<div class="abs s2" id="s2b" style="left:300px;top:292px;width:480px;height:70px"><div class="brush" id="s2brush"></div><div class="pf" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:42px;letter-spacing:1px">ENDOMETRIOSIS</div></div>
+
+<svg class="abs s2" id="uter" style="left:260px;top:372px;opacity:0" width="560" height="530" viewBox="-20 -10 440 400" overflow="visible">
+ <g id="uterG">
+  <path id="tubeL" d="M122 118C70 92 40 110 38 152" fill="none" stroke="#e4789f" stroke-width="12" stroke-linecap="round" pathLength="1"/>
+  <path id="tubeR" d="M278 118C330 92 360 110 362 152" fill="none" stroke="#e4789f" stroke-width="12" stroke-linecap="round" pathLength="1"/>
+  <path id="body" d="M200 62C150 62 112 94 108 142C104 192 130 236 155 270L163 300H237L245 270C270 236 296 192 292 142C288 94 250 62 200 62Z" fill="url(#ut)" stroke="#d63c7e" stroke-width="6" stroke-linejoin="round" pathLength="1"/>
+  <path d="M152 135C152 118 248 118 248 135C248 190 224 226 200 246C176 226 152 190 152 135Z" fill="#c9487f" opacity=".55"/>
+  <rect x="172" y="298" width="56" height="52" rx="14" fill="#f08ab4" stroke="#d63c7e" stroke-width="6"/>
+  <circle id="ovL" cx="40" cy="172" r="30" fill="#fff0f5" stroke="#d63c7e" stroke-width="6"/>
+  <circle id="ovR" cx="360" cy="172" r="30" fill="#fff0f5" stroke="#d63c7e" stroke-width="6"/>
+  <g id="les">
+   <circle class="ls" cx="38" cy="176" r="15" fill="#8e1d4d"/>
+   <circle class="ls" cx="362" cy="176" r="15" fill="#8e1d4d"/>
+   <circle class="ls" cx="78" cy="102" r="9" fill="#a3265a"/>
+   <circle class="ls" cx="322" cy="102" r="9" fill="#a3265a"/>
+   <circle class="ls" cx="141" cy="240" r="11" fill="#a3265a"/>
+   <circle class="ls" cx="262" cy="216" r="9" fill="#a3265a"/>
+   <circle class="ls" cx="198" cy="332" r="8" fill="#a3265a"/>
+  </g>
+ </g>
+</svg>
+<svg class="abs s2" id="conn" style="left:0;top:0;opacity:1" width="1080" height="1080" viewBox="0 0 1080 1080">
+ <polyline id="c1" points="236,500 330,500 392,512" fill="none" stroke="#d63c7e" stroke-width="3" stroke-dasharray="1" pathLength="1"/>
+ <polyline id="c2" points="846,520 790,520 742,570" fill="none" stroke="#d63c7e" stroke-width="3" pathLength="1"/>
+ <polyline id="c3" points="236,740 330,740 456,684" fill="none" stroke="#d63c7e" stroke-width="3" pathLength="1"/>
+</svg>
+<div class="abs lab s2" id="l1" style="left:56px;top:462px;width:190px"><b>ADHERENCIAS</b><span>en las trompas</span></div>
+<div class="abs lab s2" id="l2" style="left:822px;top:482px;width:214px"><b>ENDOMETRIOMAS</b><span>en los ovarios</span></div>
+<div class="abs lab s2" id="l3" style="left:56px;top:702px;width:190px"><b>INFLAMACIÓN</b><span>en el útero</span></div>
+<div class="abs band s2" id="s2band" style="left:44px;top:918px;width:992px;height:96px;display:flex;align-items:center;justify-content:center;color:#fff;font:500 32px PO">Inflamación crónica y <b style="font-weight:700;color:#ffd1e4;margin-left:10px">dolor pélvico</b></div>
+
+<!-- S3 -->
+<div class="abs s3 pf" id="s3a" style="left:0;width:1080px;text-align:center;top:214px;font-size:56px;line-height:1.05">¿CÓMO AFECTA <span class="mag">TU FERTILIDAD</span>?</div>
+<div class="abs s3" id="s3d" style="left:0;width:1080px;text-align:center;top:290px"><svg width="420" height="40" viewBox="0 0 420 40"><line x1="0" y1="20" x2="170" y2="20" stroke="#d63c7e" stroke-width="2"/><path d="M210 33C180 14 188 4 200 6c6 1 10 6 10 6s4-5 10-6c12-2 20 8-10 27z" fill="none" stroke="#d63c7e" stroke-width="2.5"/><line x1="250" y1="20" x2="420" y2="20" stroke="#d63c7e" stroke-width="2"/></svg></div>
+<div class="abs card step s3" id="st1" style="left:44px;top:352px;width:992px"><div class="circ">1</div><div><h3>Inflamación pélvica <span class="mag">crónica</span></h3><p>que afecta <em>óvulos</em> y <em>espermatozoides</em></p></div></div>
+<div class="abs card step s3" id="st2" style="left:44px;top:524px;width:992px"><div class="circ">2</div><div><h3>Adherencias <span class="mag">en las trompas</span></h3><p>pueden <em>bloquear</em> el paso del óvulo</p></div></div>
+<div class="abs card step s3" id="st3" style="left:44px;top:696px;width:992px"><div class="circ">3</div><div><h3>Endometriomas <span class="mag">en los ovarios</span></h3><p>pueden reducir la <em>reserva ovárica</em></p></div></div>
+<div class="abs band s3" id="s3band" style="left:44px;top:884px;width:992px;height:120px;display:flex;align-items:center;justify-content:space-around;color:#fff;font:600 30px PO">
+  <span id="bw1" style="opacity:.55">Inflamación</span><span style="opacity:.4">|</span><span id="bw2" style="opacity:.55">Adherencias</span><span style="opacity:.4">|</span><span id="bw3" style="opacity:.55">Ovarios</span></div>
+
+<!-- S4 -->
+<div class="abs s4 pf" id="s4a" style="left:62px;top:228px;font-size:50px;color:var(--magenta);letter-spacing:1px">HAY</div>
+<div class="abs s4 pf" id="s4b" style="left:58px;top:280px;font:800 92px/1 PF;letter-spacing:-1px;white-space:nowrap;color:var(--purple)">ESPERANZA</div>
+<div class="abs s4" id="s4br" style="left:48px;top:392px;width:470px;height:16px"><div class="brush" id="s4brush" style="border-radius:8px;background:linear-gradient(90deg,#d63c7e,#ec6aa0)"></div></div>
+<div class="abs s4" id="s4c" style="left:66px;top:446px;width:520px;font:400 33px/1.45 PO">Un <b class="mag" style="font-weight:700">diagnóstico temprano</b> y un <b class="mag" style="font-weight:700">tratamiento personalizado</b> mejoran tus opciones.</div>
+<div class="abs s4" id="s4btn" style="left:62px;top:668px;background:linear-gradient(90deg,#d63c7e,#ec6aa0);color:#fff;border-radius:50px;padding:24px 44px;font:600 31px PO;box-shadow:0 14px 34px rgba(214,60,126,.4);white-space:nowrap">Habla con tu especialista &nbsp;→</div>
+<div class="abs s4" id="s4name" style="left:620px;top:822px;width:410px;text-align:center;font:italic 700 26px PF;color:var(--purple)"></div>
+<div class="abs s4" id="s4disc" style="left:0;width:1080px;text-align:center;top:1004px;font:400 20px PO;color:#8c6a9f">Información educativa. No sustituye la consulta médica.</div>
+
+<!-- dots -->
+<div class="abs" id="dots" style="left:0;width:1080px;top:1038px;text-align:center;opacity:1"><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="dt"></span></div>
+<style>#dots .dt{display:inline-block;width:12px;height:12px;border-radius:6px;background:#d9b3d8;margin:0 6px}#dots .dt.on{background:var(--purple2);width:30px}</style>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cl=x=>Math.max(0,Math.min(1,x));
+const P=(t,a,d)=>cl((t-a)/d);
+const eo=x=>1-Math.pow(1-x,3);
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const bk=x=>{const c1=1.7,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+// scenes: s1 0-4.6, s2 4.6-9.6, s3 9.6-15.4, s4 15.4-20
+const SC=[0,4.6,9.6,15.4,20];
+// build leaves
+function branch(svg,n,len,rot,seed,grad){let s='';let x=0,y=0;
+ for(let i=0;i<n;i++){const k=i/n;const ang=-90+Math.sin(i*1.3+seed)*8;
+  const side=i%2?1:-1;
+  s+=`<g transform="translate(${130+Math.sin(k*2+seed)*10},${520-k*len}) rotate(${side*(40+k*10)-90*(side>0?0:0)}) scale(${2.0-k*.9})"><use href="#leaf" fill="${grad}" opacity="${.92-k*.15}"/></g>`}
+ s=`<path d="M130 540C128 400 140 250 130 ${540-len}" fill="none" stroke="#8d5cc0" stroke-width="3"/>`+s;
+ svg.innerHTML=s}
+branch($('leavesR'),9,470,0,1,'url(#gl)');
+(function(){let s='';for(let i=0;i<6;i++){const k=i/6;s+=`<g transform="translate(${60+k*40},${300-k*230}) rotate(${(i%2?30:-50)-60}) scale(${.9-k*.45})"><use href="#leaf" fill="url(#gp)" opacity=".85"/></g>`}
+ $('leavesL').innerHTML=`<path d="M60 310C62 220 80 130 100 60" fill="none" stroke="#e79ac0" stroke-width="3"/>`+s})();
+// bokeh
+(function(){let h='';for(let i=0;i<14;i++){const x=(i*173%1000)+40,y=(i*311%900)+80,r=14+(i*7%26);h+=`<div class="abs bk" style="left:${x}px;top:${y}px;width:${r*2}px;height:${r*2}px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.7),rgba(255,255,255,0));opacity:.5" data-x="${x}" data-y="${y}" data-s="${i}"></div>`}$('bokeh').innerHTML=h})();
+$('s4name').innerHTML='';
+
+// helpers: show element between a..b with animation
+function show(id,t,a,b,kind='up',d=.6,dx=0){const e=$(id);const pi=eo(P(t,a,d));const po=P(t,b,.4);
+ let o=pi*(1-po),tf='';
+ if(kind=='up')tf=`translateY(${(1-pi)*46-po*14}px)`;
+ else if(kind=='left')tf=`translateX(${-(1-pi)*80}px)`;
+ else if(kind=='right')tf=`translateX(${(1-pi)*80}px)`;
+ else if(kind=='pop'){const q=bk(P(t,a,d));tf=`scale(${.6+.4*q})`}
+ e.style.opacity=o;e.style.transform=tf;e.style.visibility=o>0.001?'visible':'hidden'}
+function wipe(id,t,a,d,b){const e=$(id);const p=eio(P(t,a,d));const po=P(t,b,.4);e.style.clipPath=`inset(0 ${(1-p)*100}% 0 0)`}
+
+function setT(t){
+ // ambient
+ $('ring').style.transform=`rotate(${t*1.5}deg) scale(${1+Math.sin(t*.6)*.02})`;
+ $('leavesR').style.transform=`rotate(${Math.sin(t*.9)*2.2}deg)`;$('leavesR').style.transformOrigin='130px 540px';
+ $('leavesL').style.transform=`rotate(${Math.sin(t*.8+1)*3}deg)`;$('leavesL').style.transformOrigin='60px 310px';
+ document.querySelectorAll('.bk').forEach(e=>{const s=+e.dataset.s;e.style.transform=`translate(${Math.sin(t*.5+s)*14}px,${Math.cos(t*.4+s*1.7)*18}px)`;e.style.opacity=.35+.25*Math.sin(t*.8+s)});
+ // header
+ show('logo',t,.1,99,'left',.8);show('badge',t,.3,99,'pop',.5);
+ const sc=SC.findIndex((v,i)=>t>=v&&t<SC[i+1]);$('bn').textContent=sc+1;
+ document.querySelectorAll('#dots .dt').forEach((d,i)=>d.className='dt'+(i==sc?' on':''));
+ // S1
+ const e1=SC[1]-.1;
+ show('s1a',t,.5,e1,'up');
+ show('s1num',t,.9,e1,'pop',.8);
+ const cp=eo(P(t,1.0,1.4));$('n1').textContent=Math.round(30*cp);$('n2').textContent=Math.round(50*cp);
+ show('s1b',t,1.7,e1,'none',.2);wipe('s1b',t,1.7,.7);
+ show('s1c',t,2.4,e1,'up');
+ show('s1h',t,2.8,e1,'up');
+ show('s1card',t,3.2,e1,'up',.7);
+ // doctor: s1 right small, s4 bigger
+ const d=$('doc');
+ const inD=eo(P(t,1.2,.9)),outD=P(t,e1,.5),inD4=eo(P(t,SC[3]+.2,.9));
+ let dOp,dTf;
+ if(t<SC[2]){dOp=inD*(1-outD);d.style.left='720px';d.style.top='222px';d.style.width='310px';d.style.height='560px';dTf=`translateX(${(1-inD)*90+outD*60}px)`}
+ else{dOp=inD4;d.style.left='600px';d.style.top='222px';d.style.width='432px';d.style.height='700px';d.style.borderRadius='216px 216px 30px 30px';dTf=`translateX(${(1-inD4)*90}px)`}
+ d.style.opacity=dOp;d.style.transform=dTf;d.style.visibility=dOp>0?'visible':'hidden';
+ $('docimg').style.transform=`scale(${1+t*.003})`;
+ // S2
+ const s2=SC[1],e2=SC[2]-.1;
+ show('s2a',t,s2+.1,e2,'up');
+ show('s2b',t,s2+.45,e2,'none',.2);wipe('s2b',t,s2+.45,.6);
+ const u=$('uter');const uo=eo(P(t,s2+.7,.6))*(1-P(t,e2,.4));u.style.opacity=uo;u.style.visibility=uo>0?'visible':'hidden';
+ u.style.transform=`scale(${.92+.08*eo(P(t,s2+.7,.9))}) translateY(${Math.sin(t*1.5)*4}px)`;
+ const dr=eio(P(t,s2+.8,1.3));
+ for(const id of['body','tubeL','tubeR']){const p=$(id);p.style.strokeDasharray='1';p.style.strokeDashoffset=String(1-dr)}
+ // lesions pop
+ document.querySelectorAll('.ls').forEach((c,i)=>{const q=bk(P(t,s2+2.0+i*.18,.5));c.style.transformBox='fill-box';c.style.transformOrigin='center';c.setAttribute('transform','');c.style.transform=`scale(${Math.max(0,q)})`});
+ // callouts
+ const L=[['l1','c1',s2+2.6],['l2','c2',s2+3.0],['l3','c3',s2+3.4]];
+ for(const[l,c,a]of L){show(l,t,a,e2,l=='l2'?'right':'left',.5);const cc=$(c);const p=eio(P(t,a+.2,.5))*(1-P(t,e2,.3));cc.style.strokeDasharray='1';cc.style.strokeDashoffset=String(1-p);cc.style.opacity=p>0?1:0}
+ show('s2band',t,s2+3.9,e2,'up');
+ // S3
+ const s3=SC[2],e3=SC[3]-.1;
+ show('s3a',t,s3+.1,e3,'up');show('s3d',t,s3+.4,e3,'up');
+ show('st1',t,s3+.9,e3,'right',.7);show('st2',t,s3+2.1,e3,'right',.7);show('st3',t,s3+3.3,e3,'right',.7);
+ show('s3band',t,s3+.7,e3,'up');
+ [['bw1',s3+.9],['bw2',s3+2.1],['bw3',s3+3.3]].forEach(([id,a])=>{const k=eo(P(t,a,.4));$(id).style.opacity=.55+.45*k;$(id).style.transform=`scale(${1+.08*k})`});
+ // S4
+ const s4=SC[3];
+ show('s4a',t,s4+.1,99,'up');show('s4b',t,s4+.3,99,'up',.8);
+ show('s4br',t,s4+.7,99,'none',.2);wipe('s4br',t,s4+.7,.7);
+ show('s4c',t,s4+1.2,99,'up');
+ show('s4btn',t,s4+2.0,99,'pop',.7);
+ const bp=1+.025*Math.sin((t-s4)*5);if(t>s4+2.7)$('s4btn').style.transform=`scale(${bp})`;
+ show('s4disc',t,s4+2.6,99,'up');
+ // fade out all at very end
+ const fo=P(t,19.6,.4);$('stage').style.opacity=1-fo*.0;
+}
+window.setT=setT;
+</script></body></html>
