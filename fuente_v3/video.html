@@ -50,11 +50,11 @@ html,body{width:1080px;height:1080px;overflow:hidden;background:#fbe3ee}
 <div class="abs" id="badge" style="right:44px;top:44px;background:var(--purple2);color:#fff;border-radius:24px;padding:8px 26px;font:600 34px PO"><span id="bn">1</span>/4</div>
 
 <!-- S1 -->
-<div class="abs s1 pf" id="s1a" style="left:70px;top:222px;font-size:54px;white-space:nowrap">¿SABÍAS QUE HASTA</div>
-<div class="abs s1 pf" id="s1num" style="left:62px;top:268px;font:800 160px/1 PF;font-variant-numeric:lining-nums;letter-spacing:-5px;white-space:nowrap;background:linear-gradient(180deg,#e8508f,#c22f72);-webkit-background-clip:text;color:transparent"><span id="n1">30</span>–<span id="n2">50</span> %</div>
-<div class="abs s1" id="s1b" style="left:48px;top:458px;width:660px;height:84px"><div class="brush" id="s1brush"></div><div class="pf" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:29px;letter-spacing:.5px;white-space:nowrap">DE LAS MUJERES CON ENDOMETRIOSIS</div></div>
-<div class="abs s1" id="s1c" style="left:70px;top:566px;font:500 36px/1.35 PO;color:var(--purple);width:600px">enfrenta dificultades para <b class="mag" style="font-weight:700">embarazarse</b>.</div>
-<div class="abs s1" id="s1h" style="left:70px;top:690px"><svg width="420" height="40" viewBox="0 0 420 40"><line x1="0" y1="20" x2="170" y2="20" stroke="#d63c7e" stroke-width="2"/><path d="M210 33C180 14 188 4 200 6c6 1 10 6 10 6s4-5 10-6c12-2 20 8-10 27z" fill="none" stroke="#d63c7e" stroke-width="2.5" transform="translate(0,0)"/><line x1="250" y1="20" x2="420" y2="20" stroke="#d63c7e" stroke-width="2"/></svg></div>
+<div class="abs s1 pf" id="s1a" style="left:70px;top:222px;font-size:64px;white-space:nowrap">¿SABÍAS QUE HASTA</div>
+<div class="abs s1 pf" id="s1num" style="left:62px;top:290px;font:800 220px/1 PF;font-variant-numeric:lining-nums;letter-spacing:-5px;white-space:nowrap;background:linear-gradient(180deg,#e8508f,#c22f72);-webkit-background-clip:text;color:transparent"><span id="n1">30</span>–<span id="n2">50</span> %</div>
+<div class="abs s1" id="s1b" style="left:48px;top:530px;width:900px;height:92px"><div class="brush" id="s1brush"></div><div class="pf" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:40px;letter-spacing:.5px;white-space:nowrap">DE LAS MUJERES CON ENDOMETRIOSIS</div></div>
+<div class="abs s1" id="s1c" style="left:70px;top:646px;font:500 42px/1.35 PO;color:var(--purple);width:900px">enfrenta dificultades para <b class="mag" style="font-weight:700">embarazarse</b>.</div>
+<div class="abs s1" id="s1h" style="left:70px;top:748px"><svg width="420" height="40" viewBox="0 0 420 40"><line x1="0" y1="20" x2="170" y2="20" stroke="#d63c7e" stroke-width="2"/><path d="M210 33C180 14 188 4 200 6c6 1 10 6 10 6s4-5 10-6c12-2 20 8-10 27z" fill="none" stroke="#d63c7e" stroke-width="2.5" transform="translate(0,0)"/><line x1="250" y1="20" x2="420" y2="20" stroke="#d63c7e" stroke-width="2"/></svg></div>
 
 <!-- doctor arch (s1 + s4) -->
 <div class="abs" id="doc" style="left:720px;top:222px;width:310px;height:560px;border-radius:155px 155px 28px 28px;overflow:hidden;border:6px solid #fff;box-shadow:0 20px 50px rgba(122,60,156,.28)"><img id="docimg" src="doc_c.png" style="width:100%;height:100%;object-fit:cover;object-position:50% 0"></div>
@@ -189,7 +189,7 @@ function setT(t){
  const d=$('doc');
  const inD=eo(P(t,1.2,.9)),outD=P(t,e1,.5),inD4=eo(P(t,SC[3]+.2,.9));
  let dOp,dTf;
- if(t<SC[2]){dOp=inD*(1-outD);d.style.left='720px';d.style.top=(TALL?272:222)+'px';d.style.width='310px';d.style.height=(TALL?700:560)+'px';dTf=`translateX(${(1-inD)*90+outD*60}px)`}
+ if(t<SC[2]){dOp=0;d.style.left='720px';d.style.top=(TALL?272:222)+'px';d.style.width='310px';d.style.height=(TALL?700:560)+'px';dTf=`translateX(${(1-inD)*90+outD*60}px)`}
  else{dOp=inD4;d.style.left='600px';d.style.top=(TALL?272:222)+'px';d.style.width='432px';d.style.height=(TALL?860:700)+'px';d.style.borderRadius='216px 216px 30px 30px';dTf=`translateX(${(1-inD4)*90}px)`}
  d.style.opacity=dOp;d.style.transform=dTf;d.style.visibility=dOp>0?'visible':'hidden';
  $('docimg').style.transform=`scale(${1+t*.003})`;
